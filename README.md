@@ -23,7 +23,7 @@ npm run build
 
 ## Deploy (GitHub Pages)
 
-- O deploy está configurado em `/tmp/workspace/PedroJVDV/flowerTestProject/.github/workflows/deploy-pages.yml`
+- O deploy está configurado em `.github/workflows/deploy-pages.yml`
 - A cada push na branch `main`, o GitHub Actions publica automaticamente no Pages
 - URL esperada do site: `https://pedrojvdv.github.io/flowerTestProject/`
 
