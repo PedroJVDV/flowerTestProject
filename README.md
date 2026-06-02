@@ -20,3 +20,15 @@ npm run dev
 npm run lint
 npm run build
 ```
+
+## Deploy (GitHub Pages)
+
+- O deploy está configurado em `/tmp/workspace/PedroJVDV/flowerTestProject/.github/workflows/deploy-pages.yml`
+- A cada push na branch `main`, o GitHub Actions publica automaticamente no Pages
+- URL esperada do site: `https://pedrojvdv.github.io/flowerTestProject/`
+
+### Ativar no GitHub
+
+1. No repositório, abra **Settings > Pages**
+2. Em **Build and deployment**, selecione **Source: GitHub Actions**
+3. Faça push na `main` (ou rode manualmente o workflow)
