@@ -1,0 +1,164 @@
+.scene {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #000;
+  overflow: hidden;
+  transition: background 900ms ease;
+  isolation: isolate;
+}
+
+.scene::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(148, 7, 33, 0.16), transparent 55%);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.scene-bloomed {
+  background: linear-gradient(180deg, #8e021f 0%, #b10f2f 45%, #890019 100%);
+}
+
+.scene-bloomed::before {
+  opacity: 1;
+}
+
+.wave-overlay {
+  position: absolute;
+  inset: -40% -10% 0;
+  background:
+    radial-gradient(110% 58% at 50% 100%, rgba(255, 180, 199, 0.24), transparent 65%),
+    repeating-radial-gradient(
+      ellipse at 50% 120%,
+      rgba(255, 170, 185, 0.22) 0 11%,
+      rgba(138, 8, 31, 0) 14% 25%
+    );
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 850ms ease,
+    transform 850ms ease;
+  animation: waveDrift 6s ease-in-out infinite;
+}
+
+.scene-bloomed .wave-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.flower-button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 280ms ease;
+}
+
+.flower-button:hover,
+.flower-button:focus-visible {
+  transform: scale(1.05);
+}
+
+.flower-button:focus-visible {
+  outline: 2px solid rgba(255, 143, 167, 0.9);
+  outline-offset: 8px;
+  border-radius: 12px;
+}
+
+.pixel-flower {
+  --pixel-size: clamp(9px, 1.8vw, 14px);
+  display: grid;
+  grid-template-columns: repeat(13, var(--pixel-size));
+  grid-template-rows: repeat(12, var(--pixel-size));
+  gap: 2px;
+  padding: clamp(16px, 3vw, 24px);
+  border-radius: 20px;
+  backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+.pixel {
+  width: var(--pixel-size);
+  height: var(--pixel-size);
+  border-radius: 2px;
+}
+
+.pixel-red {
+  background: #eb2c56;
+}
+
+.pixel-green {
+  background: #3aaa52;
+}
+
+.pixel-black {
+  background: #111;
+}
+
+.bloom-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: var(--size);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+  animation: bloom var(--duration) ease-out forwards;
+  animation-delay: var(--delay);
+  filter: drop-shadow(0 6px 6px rgba(70, 0, 18, 0.35));
+}
+
+.after-message {
+  position: relative;
+  z-index: 1;
+  color: #ffdfe8;
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  letter-spacing: 0.05em;
+  text-shadow: 0 6px 12px rgba(57, 0, 12, 0.4);
+  padding: 0 1rem;
+}
+
+@keyframes bloom {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
+      rotate(var(--rotate))
+      scale(1.2);
+  }
+}
+
+@keyframes waveDrift {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-18px) translateX(10px) scale(1.05);
+  }
+}
+
+@media (max-width: 600px) {
+  .pixel-flower {
+    gap: 1px;
+  }
+}
